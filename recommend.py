@@ -8,7 +8,7 @@ import pandas as pd
 import math
 
 
-# In[31]:
+# In[2]:
 
 
 def recommending_books(book_list, tag_list, author_score_rate=1.0, country_score_rate=0.5, tag_score_rate=1.5, 
@@ -69,43 +69,7 @@ def recommending_books(book_list, tag_list, author_score_rate=1.0, country_score
             return score
         
     top_idx = book.apply(calculate_score, axis=1).sort_values(ascending=False).index[:topn]
-    print(book.loc[top_idx])
+    # print(book.loc[top_idx])
     
-    return book.title[top_idx].tolist(), top_idx
-
-
-# In[32]:
-
-
-book = pd.read_json("book.json", encoding='cp949')
-
-
-# In[33]:
-
-
-book_list = book.title[60:80]
-
-
-# In[36]:
-
-
-book_list
-
-
-# In[34]:
-
-
-tag_list = ['로맨스', '스릴러', '판타지']
-
-
-# In[35]:
-
-
-recommending_books(book_list, tag_list)
-
-
-# In[ ]:
-
-
-
+    return book.title[top_idx].tolist()
 
