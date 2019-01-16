@@ -59,8 +59,8 @@ def recommending_books(book_list, tag_list, author_score_rate=1.0, country_score
             score = 0
             if row['author'] in author_score:
                 score += author_score[row['author']] * author_score_rate
-            if row['country'] in author_score:
-                score += author_score[row['author']] * country_score_rate
+            if row['country'] in country_score:
+                score += country_score[row['country']] * country_score_rate
             tags = row['tags']
             for tag in tags:
                 if tag in tag_score:
