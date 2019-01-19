@@ -6,7 +6,7 @@
 
 import pandas as pd
 import math
-
+import sys
 
 # In[2]:
 
@@ -14,10 +14,8 @@ import math
 def recommending_books(book_list, tag_list, author_score_rate=1.0, country_score_rate=0.5, tag_score_rate=1.5, 
                        topn=10, book_path="book.json"):
     
-    book = pd.read_json(book_path, encoding='cp949')
-    
+    book = pd.read_json(book_path) 
     read_book = book[book['title'].isin(book_list)]
-    
     # 읽은 책들에 대한 작가의 등장 횟수로 score계산
     author_score = read_book.author.value_counts().to_dict()
     for author in author_score:
@@ -70,6 +68,9 @@ def recommending_books(book_list, tag_list, author_score_rate=1.0, country_score
         
     top_idx = book.apply(calculate_score, axis=1).sort_values(ascending=False).index[:topn]
     # print(book.loc[top_idx])
-    
+
     return book.title[top_idx].tolist()
 
+if __name__ == "__main__":
+    #test
+    #recommending_books(['모모',],['판타지',])
