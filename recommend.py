@@ -2,19 +2,19 @@
 # coding: utf-8
 
 # In[1]:
-
-
 import pandas as pd
 import math
 import sys
-
+import os
+import codecs
+import json
 # In[2]:
 
 
 def recommending_books(book_list, tag_list, author_score_rate=1.0, country_score_rate=0.5, tag_score_rate=1.5, 
-                       topn=10, book_path="book.json"):
-    
-    book = pd.read_json(book_path) 
+                       topn=10, book_path="ebdjango/ebdjango/book_watcha/book.json"):
+    print(book_list)
+    book = pd.read_json(codecs.open('ebdjango/book_watcha/book.json','r','utf-8-sig'))
     read_book = book[book['title'].isin(book_list)]
     # 읽은 책들에 대한 작가의 등장 횟수로 score계산
     author_score = read_book.author.value_counts().to_dict()
@@ -73,4 +73,4 @@ def recommending_books(book_list, tag_list, author_score_rate=1.0, country_score
 
 if __name__ == "__main__":
     #test
-    #recommending_books(['모모',],['판타지',])
+    recommending_books(['모모',],['판타지',])
